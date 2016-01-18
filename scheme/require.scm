@@ -13,3 +13,9 @@
 						(else (cons n (range ((if (< n m)
 																			+ 
 																			-) n 1) m)))))))
+
+(define take 
+	(lambda (lst n)
+		(if (> n 0)
+				(cons (car lst) (take (cdr lst) (- n 1)))
+				'())))
