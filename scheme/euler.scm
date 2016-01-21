@@ -101,3 +101,14 @@
 (define factor-count
 	(lambda (n)
 		(factor-count* n (prime-factors n) 0 1 0)))
+
+(define digit-sum
+	(lambda (n)
+		; sum of str->num of char->int -48 
+		(foldr + 0 (map (lambda (x) (- x 48)) (map char->integer (string->list (number->string n)))))))
+
+(define !
+	(lambda (n)
+		(if (= n 0)
+				1
+				(* n (! (- n 1))))))
