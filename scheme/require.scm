@@ -14,8 +14,22 @@
 																			+ 
 																			-) n 1) m)))))))
 
-(define take 
+(define take
 	(lambda (lst n)
 		(if (> n 0)
 				(cons (car lst) (take (cdr lst) (- n 1)))
 				'())))
+
+(define file-lines-helper
+	(lambda (inport current-lst)
+		(let ((line (read-line inport)))
+			(if (eof-object? line)
+					current-lst
+					(file-lines-helper inport (cons line current-lst))))))
+
+(define file->lines
+	(lambda (filename)
+		(let ((inport (open-input-file filename)))
+			(begin (define result (file-lines-helper inport '()))
+						 (close-input-port inport)
+						 result))))
