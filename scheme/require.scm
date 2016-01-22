@@ -1,3 +1,5 @@
+(load "sort.scm")
+
 (define foldr
 	(lambda (f init seq)
 		(if (null? seq)
@@ -13,13 +15,15 @@
 						(else (cons n (range ((if (< n m)
 																			+ 
 																			-) n 1) m)))))))
-
+; first n elements of a list
 (define take
 	(lambda (lst n)
 		(if (> n 0)
 				(cons (car lst) (take (cdr lst) (- n 1)))
 				'())))
 
+; filename to list of lines
+;
 (define file-lines-helper
 	(lambda (inport current-lst)
 		(let ((line (read-line inport)))
@@ -33,3 +37,16 @@
 			(begin (define result (file-lines-helper inport '()))
 						 (close-input-port inport)
 						 result))))
+
+
+; file to string
+(define file->string
+	(lambda (filename)
+		(with-input-from-file filename read)))
+
+(define filter
+	(lambda (pred lst)
+		(cond ((null? lst) '())
+					((pred (car lst)) (cons (car lst) (filter pred (cdr lst))))
+					(else (filter pred (cdr lst))))))
+

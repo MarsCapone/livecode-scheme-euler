@@ -73,22 +73,6 @@
 		(factors* 1)))
 
 ; find the number of factors of a number from permuting the primes
-;(define factor-count
-;	(lambda (n)
-;		(define factor-count*
-;			(lambda (lst prev-prime m c)
-;				(if (null? lst)
-;						(* m (+ c 1))
-;						(if (= (car lst) prev-prime)
-;								(factor-count* (cdr lst) 
-;															 (car lst) 
-;															 m 
-;															 (+ c 1))
-;								(factor-count* (cdr lst) 
-;															 (car lst) 
-;															 (* m (+ c 1))
-;															 1)))))
-;		(factor-count* (prime-factors n) 0 1 0)))
 
 (define factor-count*
 	(lambda (n prime-lst prev-prime multiplier counter)
@@ -112,3 +96,28 @@
 		(if (= n 0)
 				1
 				(* n (! (- n 1))))))
+
+
+(define binary
+	(lambda (n)
+		(number->string n 2)))
+
+
+(define namescore
+	(lambda (name)
+		(namescore-helper (string->list name) 0)))
+
+(define namescore-helper
+	(lambda (char-lst score)
+		(if (null? char-lst)
+				score
+				(namescore-helper (cdr char-lst) 
+													(if (and (>= (char->integer (car char-lst))
+																			 65)
+																	 (<= (char->integer (car char-lst))
+																			 90))
+															(+ (- (char->integer (car char-lst)) 
+																		64)
+																 score)
+															score)))))
+
