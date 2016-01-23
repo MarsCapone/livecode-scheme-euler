@@ -30,7 +30,7 @@
 		(= (length (prime-factors n))
 			 1)))
 
-; find first n primes (from rosetta code)
+; find primes below n (from rosetta code)
 (define sieve
 	(lambda (n)
 		(define aux
