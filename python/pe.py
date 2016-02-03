@@ -36,6 +36,15 @@ def pe6():
     return abs(sum([i * i for i in range(1, 101)]) - (sum(range(1, 101))) ** 2)
 
 
+# ----- Problem 31 ----- #
+def pe31():
+    target = 200
+    coins = [1, 2, 5, 10, 20, 50, 100, 200]
+    ways = [1] + [0]*target
+    for coin in coins:
+        for i in range(coin, target+1):
+            ways[i] += ways[i-coin]
+    return ways[target]
 
 # ----- Problem 33 ----- #
 def pe33():
@@ -48,3 +57,13 @@ def pe33():
                     denproduct *= den
                     nomproduct *= nom
     return denproduct / gcd(nomproduct, denproduct)
+
+# ----- Problem 44 ----- #
+def pe44():
+    pentagoner = set(n * ((3 * n) - 1) / 2 for n in range(2, 4000))
+    for i in pentagoner:
+        for b in pentagoner:
+            if i + b in pentagoner:
+                if i + 2*b in pentagoner:
+                    return i
+
